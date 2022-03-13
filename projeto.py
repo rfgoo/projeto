@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from numpy import vstack, ones
+from numpy.linalg import lstsq
 
 d = int(input("Distancia: "))
 h1 = int(input("Altura mastro emissor: "))
@@ -39,6 +41,35 @@ linha_vista = (emissor, receptor)
 x_vista = [linha_vista[0][0], linha_vista[1][0]]
 y_vista = [linha_vista[0][1], linha_vista[1][1]]
 ax.plot(x_vista, y_vista, linestyle="--", label="Linha de vista")
+
+
+beta = np.arctan((emissor[1]-receptor[1])/d)
+print(f"Beta = {beta} rad")
+
+# g = (4*np.pi)/(theta**2)
+
+
+plt.legend()
+plt.show()
+
+vista_sim = [int(input("possivel reflexões(x): ")), int(input("possivel reflexões(y): "))]
+vista_sim_ = [(vista_sim[0], vista_sim[1]), (receptor[0], receptor[1])]
+
+
+fig1, ax = plt.subplots()
+ax.plot(x, y, label="Modelo da terra esférica")
+ax.plot(x, y3, label="Perfil em Terra esférica")
+ax.plot(emissor[0], emissor[1], marker="o", markersize=10,  markerfacecolor="green", label="Emissor")
+ax.plot(receptor[0], receptor[1], marker="o", markersize=10,  markerfacecolor="red", label="Recetor")
+ax.plot(x_vista, y_vista, linestyle="--", label="Linha de vista")
+
+
+x_coords, y_coords = zip(*vista_sim_)
+A = vstack([x_coords, ones(len(x_coords))]).T
+m, c = lstsq(A, y_coords)[0]
+print("Line Solution is y = {m}x + {c}".format(m=m, c=c))
+y4 = m*x+c
+ax.plot(x, y4, linestyle="--", label="Zona vista sim.")
 
 plt.legend()
 plt.show()
