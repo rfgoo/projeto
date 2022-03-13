@@ -42,13 +42,6 @@ x_vista = [linha_vista[0][0], linha_vista[1][0]]
 y_vista = [linha_vista[0][1], linha_vista[1][1]]
 ax.plot(x_vista, y_vista, linestyle="--", label="Linha de vista")
 
-
-beta = np.arctan((emissor[1]-receptor[1])/d)
-print(f"Beta = {beta} rad")
-
-# g = (4*np.pi)/(theta**2)
-
-
 plt.legend()
 plt.show()
 
@@ -73,3 +66,23 @@ ax.plot(x, y4, linestyle="--", label="Zona vista sim.")
 
 plt.legend()
 plt.show()
+
+dis = [int(input("Interseção do perfil com a linha de vista mútua(x): ")),
+       int(input("Interseção do perfil com a linha de vista mútua(y): "))]
+
+h_linha = emissor[1]-dis[1]
+
+beta = np.arctan((emissor[1]-receptor[1])/d)
+print(f"Beta = {beta} rad")
+
+alfa = np.arctan(h_linha/dis[0])
+print(f"Alfa = {alfa} rad")
+
+gamma = alfa-beta
+print(f"Gamma = {gamma} rad")
+
+theta = 2*gamma
+print(f"Theta = {theta} rad")
+g = (4*np.pi)/(theta**2)
+g_dB = 10*np.log10(g)
+print(f"Ganho = {g}\nGanho[dB] = {g_dB} dB")
