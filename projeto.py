@@ -59,7 +59,7 @@ ax.plot(x_vista, y_vista, linestyle="--", label="Linha de vista")
 
 x_coords, y_coords = zip(*vista_sim_)
 A = vstack([x_coords, ones(len(x_coords))]).T
-m, c = lstsq(A, y_coords)[0]
+m, c = lstsq(A, y_coords, rcond=None)[0]
 print("Line Solution is y = {m}x + {c}".format(m=m, c=c))
 y4 = m*x+c
 ax.plot(x, y4, linestyle="--", label="Zona vista sim.")
@@ -83,6 +83,7 @@ print(f"Gamma = {gamma} rad")
 
 theta = 2*gamma
 print(f"Theta = {theta} rad")
+
 g = (4*np.pi)/(theta**2)
 g_dB = 10*np.log10(g)
 print(f"Ganho = {g}\nGanho[dB] = {g_dB} dB")
