@@ -45,7 +45,7 @@ ax.plot(x_vista, y_vista, linestyle="--", label="Linha de vista")
 
 plt.legend()
 plt.show()
-
+"""
 vista_sim = [int(input("possivel reflexões(x): ")), int(input("possivel reflexões(y): "))]
 vista_sim_r = [(vista_sim[0], vista_sim[1]), (receptor[0], receptor[1])]
 
@@ -106,3 +106,4 @@ ax.plot(x, line_eq(vista_sim_e), linestyle="--", label="Zona vista sim 2e.")
 
 plt.legend()
 plt.show()
+"""
